@@ -14,6 +14,22 @@ public class AviaSoulsTest {
     Ticket ticket6 = new Ticket("Город 3", "Город 2", 8000, 730, 1200);
 
     @Test
+    public void shouldCompareElements() {
+        Assertions.assertEquals(ticket1.compareTo(ticket2), -1);
+        Assertions.assertEquals(ticket2.compareTo(ticket3), 1);
+        Assertions.assertEquals(ticket1.compareTo(ticket3), 1);
+        Assertions.assertEquals(ticket1.compareTo(ticket4), 0);
+    }
+
+    @Test
+    public void shouldCompareElementsByDuration() {
+        TicketTimeComparator comparator = new TicketTimeComparator();
+        Assertions.assertEquals(comparator.compare(ticket1, ticket2), 1);
+        Assertions.assertEquals(comparator.compare(ticket1, ticket3), -1);
+        Assertions.assertEquals(comparator.compare(ticket1, ticket4), 0);
+    }
+
+    @Test
     public void shouldSearchTicketsAndSortByPrice() {
         manager.add(ticket1);
         manager.add(ticket2);
